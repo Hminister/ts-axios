@@ -1,5 +1,5 @@
-import { isDate } from './util'
-import { isObject } from 'util'
+import { isDate, isObject } from './util'
+
 function encode(val: string): string {
   return encodeURIComponent(val)
     .replace(/%40/g, '@')
@@ -23,16 +23,13 @@ export function buildUrl(url: string, params?: any) {
     if (val === null || typeof val === 'undefined') {
       return
     }
-
     let values: string[]
-
     if (Array.isArray(val)) {
       values = val
-      key += []
+      key += '[]'
     } else {
       values = [val]
     }
-
     values.forEach(val => {
       if (isDate(val)) {
         val = val.toISOString()
@@ -42,6 +39,17 @@ export function buildUrl(url: string, params?: any) {
       parts.push(`${encode(key)}=${encode(val)}`)
     })
   })
+
+  let serializedParams = parts.join('&')
+
+  if (serializedParams) {
+    const markIndex = url.indexOf('#')
+    if (markIndex !== -1) {
+      url = url.slice(0, markIndex)
+    }
+
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams
+  }
 
   return url
 }

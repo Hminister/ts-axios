@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from './types/index'
 import xhr from './xhr'
-// import {} from '../'
+import { buildUrl } from '../helpers/url'
 
 function axios(config: AxiosRequestConfig): void {
   processConfig(config)
