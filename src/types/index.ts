@@ -13,6 +13,7 @@ export type methods =
 export interface AxiosRequestConfig {
   url: string
   method?: methods
+  headers?: any
   data?: any
   params?: any
 }
