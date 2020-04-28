@@ -9,7 +9,7 @@ function axios(config: AxiosRequestConfig): void {
 }
 function processConfig(config: AxiosRequestConfig) {
   config.url = transformUrl(config)
-  config.headers = tranfomHeaders(config)
+  config.headers = transformHeaders(config)
   config.data = transformRequestData(config)
 }
 
@@ -21,9 +21,8 @@ function transformRequestData(config: AxiosRequestConfig) {
   return tranfomRequest(config.data)
 }
 
-function tranfomHeaders(config: AxiosRequestConfig) {
+function transformHeaders(config: AxiosRequestConfig) {
   const { headers = {}, data } = config
   return processHeaders(headers, data)
 }
-
 export default axios

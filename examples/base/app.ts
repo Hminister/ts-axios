@@ -82,7 +82,7 @@ axios({
   method: 'post',
   url: '/base/post',
   headers: {
-    'content-type': 'application/json;'
+    'content-type': 'application/json; charset=utf-8'
   },
   data: {
     a: 1,
@@ -97,4 +97,15 @@ axios({
   method: 'post',
   url: '/base/post',
   data: searchParams
+})
+
+axios({
+  method: 'post',
+  url: '/base/post',
+  data: {
+    a: 1,
+    b: 2
+  }
+}).then(res => {
+  console.log(res)
 })

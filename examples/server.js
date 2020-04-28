@@ -21,7 +21,8 @@ app.use(
 app.use(webpackHotMiddleware(compiler))
 
 app.use(express.static(__dirname))
-
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 const router = express.Router()
 router.get('/simple/get', function(req, res) {
   res.json({
@@ -34,6 +35,7 @@ router.get('/base/get', function(req, res) {
 })
 
 router.post('/base/post', function(req, res) {
+  // console.log(req)
   res.json(req.body)
 })
 
@@ -51,9 +53,6 @@ router.post('/base/buffer', function(req, res) {
 })
 
 app.use(router)
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 
 const port = process.env.PORT || 8080
 module.exports = app.listen(port, () => {
